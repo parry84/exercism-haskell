@@ -70,12 +70,8 @@ cases = [ Case { description = "with empty sentence"
                , input       = "abcdefghijklmnopqrstuvwxyzÃ"
                , expected    = True
                }
-
-        {-
-        -- The following test can be enabled for String-based solutions:
         , Case { description = "with termination as soon as all letters have occurred"
                , input       = "abcdefghijklmnopqrstuvwxyz" ++ [undefined]
                , expected    = True
                }
-        -- -}
         ]
