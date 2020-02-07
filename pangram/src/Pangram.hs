@@ -11,20 +11,23 @@ type PangramValue = Int
 type PangramState = (String, PangramValue)
 
 isPangram :: String -> Bool
-isPangram text = isPangramRecursive text initalState
+isPangram = isPangramWithNub
 
-isPangramWithNub = check . length . nub . filter isAz . map toLower
+-- Implementation 1: with lists
+isPangramWithNub = check . length . take 26 . nub . filter isAz . map toLower
 
-isPangramRecursive [] (_, count) = check count
-isPangramRecursive (x : xs) (letters, count)
+-- Implementation 2: with recursion
+isPangramRecursive = flip isPangramRecursive' initalState
+isPangramRecursive' [] (_, count) = check count
+isPangramRecursive' (x : xs) (letters, count)
   | check count = True
-  | isAz x' && (x' `notElem` letters) = isPangramRecursive
+  | isAz x' && (x' `notElem` letters) = isPangramRecursive'
     xs
     (x' : letters, count + 1)
-  | otherwise = isPangramRecursive xs (letters, count)
+  | otherwise = isPangramRecursive' xs (letters, count)
   where x' = toLower x
 
-isPangramMonadic :: String -> Bool
+-- Implementation 3: with State monad
 isPangramMonadic text = check $ evalState (go text) initalState
  where
   go :: String -> State PangramState PangramValue
