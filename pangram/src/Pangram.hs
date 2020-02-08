@@ -11,12 +11,15 @@ type PangramValue = Int
 type PangramState = (String, PangramValue)
 
 isPangram :: String -> Bool
-isPangram = isPangramWithNub
+isPangram = isPangramAll
 
--- Implementation 1: with lists
+-- Implementation 1: with 'all'
+isPangramWithAll s = all (`elem` map toLower s) ['a'..'z']
+
+-- Implementation 2: with 'nub'
 isPangramWithNub = check . length . take 26 . nub . filter isAz . map toLower
 
--- Implementation 2: with recursion
+-- Implementation 3: with recursion
 isPangramRecursive = flip isPangramRecursive' initalState
 isPangramRecursive' [] (_, count) = check count
 isPangramRecursive' (x : xs) (letters, count)
