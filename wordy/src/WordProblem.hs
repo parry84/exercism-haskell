@@ -45,7 +45,7 @@ parseDiv = do
 parseNumber :: ReadP Integer
 parseNumber = readS_to_P reads
 
-opToFunction :: Op Integer -> Integer -> Integer
+opToFunction :: Integral a => Op a -> a -> a
 opToFunction op = case op of
   Plus  x -> (+ x)
   Minus x -> subtract x
