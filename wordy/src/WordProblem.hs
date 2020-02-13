@@ -5,6 +5,7 @@ where
 
 import           Text.ParserCombinators.ReadP
 import           Control.Applicative            ( (<|>) )
+import Data.List
 
 data Op a = Plus a | Minus a | By a | DivBy a
 
