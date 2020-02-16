@@ -22,6 +22,7 @@ type PangramState = (String, PangramValue)
 isPangram :: String -> Bool
 isPangram = isPangramWithAll
 
+
 -- Implementation 1: with sub set
 isPangramWithSubset = (alphabet `isSubsetOf`) . fromList . lower
 
@@ -34,7 +35,7 @@ alphabet = fromList ['a' .. 'z']
 isPangramWithAll text = all (`elem` lower text) ['a' .. 'z']
 
 -- Implementation 4: with 'nub'
-isPangramWithNub = check . length . take 26 . nub . filter isAz . map toLower
+isPangramWithNub = check . length . take 26 . nub . filter isAz . lower
 
 -- Implementation 5: with recursion
 isPangramRecursive = flip isPangramRecursive' initalState
